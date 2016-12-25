@@ -49,7 +49,7 @@ class YoutubeLibraryProvider(backend.LibraryProvider):
 
         session.search(self,
             youtube_query, callback,
-            track_count=50)
+            track_count=20)
 
         try:
             return future.get(timeout=self.backend.config['youtube']['timeout'])

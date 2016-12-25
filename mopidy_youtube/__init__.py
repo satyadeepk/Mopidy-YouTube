@@ -22,6 +22,7 @@ class Extension(ext.Extension):
         schema['bitrate'] = config.Integer()
         schema['timeout'] = config.Integer()
         schema['apikey'] = config.Secret()
+        schema['download_dir'] = config.String()
         
         return schema
 
