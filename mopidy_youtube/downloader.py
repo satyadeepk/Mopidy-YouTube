@@ -18,3 +18,9 @@ def download_if_not_exists(download_dir, youtubeId):
         print('Downloading ' + youtubeId)
         os.system(command)
     return filepath
+
+def download_uris(download_dir, trackuris):
+    for uri in trackuris:
+        if uri.startswith('youtube:'):
+            youtubeId = uri[len('youtube:'):]
+            download_if_not_exists(download_dir, youtubeId)
