@@ -7,7 +7,7 @@ import youtube_dl
 from mopidy import backend
 
 from mopidy_youtube.library import YoutubeLibraryProvider
-
+from .downloader import download_if_not_exists
 logger = logging.getLogger(__name__)
 
 
@@ -36,22 +36,7 @@ class YouTubePlaybackProvider(backend.PlaybackProvider):
             uri = uri[len('youtube:'):]
 
         download_dir = self.config['youtube']['download_dir']
-        filepath = download_dir + uri + '.mp3'
-
-        if not os.path.isfile(filepath):
-	        command_tokens = [
-	            'youtube-dl',
-	            '--extract-audio',
-	            '--audio-format mp3',
-	            '--audio-quality 0',
-	            '--output \'' +  download_dir + '%(id)s.%(ext)s\'',
-	            # '--output \'~/Music/%(title)s.%(ext)s\'',
-	            uri]
-	        
-	        command = ' '.join(command_tokens)
-	        print('Downloading ' + uri)
-	        os.system(command)
-
+        filepath = download_if_not_exists(download_dir, uri)
         fileurl = 'file://' + filepath
         print('Playback ' + fileurl)
         return fileurl

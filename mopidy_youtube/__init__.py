@@ -29,3 +29,7 @@ class Extension(ext.Extension):
     def setup(self, registry):
         from .backend import YoutubeBackend
         registry.add('backend', YoutubeBackend)
+
+        from .frontend import YoutubeFrontend
+        registry.add('frontend', YoutubeFrontend)
+
