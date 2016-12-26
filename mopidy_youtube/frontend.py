@@ -20,6 +20,8 @@ class YoutubeFrontend(pykka.ThreadingActor, CoreListener):
         self.core = core      
     
     def tracklist_changed(self):
+        self.save_state()
+
         download_dir = self.config['youtube']['download_dir']
         logger.info('Frontend: Tracklist changed')
         tracks = self.core.tracklist.get_tracks().get()
@@ -30,6 +32,10 @@ class YoutubeFrontend(pykka.ThreadingActor, CoreListener):
                 trackuris.append(track.uri)
 
         downloader.download_uris(download_dir, trackuris)
+
+    def save_state(self): 
+        #This works only on the latest Mopidy 2.1 (develop branch)
+        self.core.teardown()
 
     def on_start(self):
         logger.info('On Start')
