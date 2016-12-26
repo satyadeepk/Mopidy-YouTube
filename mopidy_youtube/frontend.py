@@ -31,3 +31,8 @@ class YoutubeFrontend(pykka.ThreadingActor, CoreListener):
 
         downloader.download_uris(download_dir, trackuris)
 
+    def on_start(self):
+        logger.info('On Start')
+
+    def on_stop(self):
+        logger.info('On Stop')
