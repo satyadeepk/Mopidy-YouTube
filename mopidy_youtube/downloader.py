@@ -16,6 +16,7 @@ def download_if_not_exists(download_dir, youtubeId):
         
         command = ' '.join(command_tokens)
         print('Downloading ' + youtubeId)
+        print('' + command)
         os.system(command)
         print('Download ' + youtubeId + ' complete.')
     return filepath
