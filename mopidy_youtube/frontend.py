@@ -39,6 +39,7 @@ class YoutubeFrontend(pykka.ThreadingActor, CoreListener):
 
     def on_start(self):
         logger.info('On Start')
+        self.save_state()
 
     def on_stop(self):
         logger.info('On Stop')
